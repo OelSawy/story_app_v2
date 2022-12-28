@@ -23,14 +23,17 @@ class Story extends StatelessWidget {
       ),
       body: Consumer<StoryProvider>(
         builder: (context, provider, _) {
-          return context.read<StoryProvider>().state.status == ScreenStatus.loading ? 
+          return provider.state.status == ScreenStatus.loading ? 
             const Center(child: CircularProgressIndicator()) :
             ListView.separated(
               separatorBuilder: (context, index) {
                 return const SizedBox(height: 20);
               },
               itemCount: context.read<StoryProvider>().state.stories.length,
-              itemBuilder: (context, index) => listContents(context, index),
+              itemBuilder: (context, index) => InkWell(
+                child: listContents(context, index),
+                onTap: () => Navigator.of(context).pushNamed(AppRoutes.currentStory, arguments: provider.state.stories[index]),
+              ),
               padding: const EdgeInsets.only(top: 20),
             );
         },

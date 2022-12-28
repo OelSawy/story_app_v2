@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:story_app_v2/Core/app_routes.dart';
+import 'package:story_app_v2/Data/Models/Story%20Model/StoryModel.dart';
 import 'package:story_app_v2/Screens/Contacts/Contacts.dart';
 import 'package:story_app_v2/Screens/Contacts/Provider/ContactsProvider.dart';
 import 'package:story_app_v2/Screens/Home/Home.dart';
@@ -9,6 +10,7 @@ import 'package:story_app_v2/Screens/Log%20In/Provider/logInProvider.dart';
 import 'package:story_app_v2/Screens/Log%20In/logIn.dart';
 import 'package:story_app_v2/Screens/Splash/Provider/SplashProvider.dart';
 import 'package:story_app_v2/Screens/Splash/SplashScreen.dart';
+import 'package:story_app_v2/Screens/Story/Components/current_story.dart';
 import 'package:story_app_v2/Screens/Story/Provider/StoryProvider.dart';
 import 'package:story_app_v2/Screens/Story/Story.dart';
 
@@ -34,7 +36,8 @@ class MyApp extends StatelessWidget {
           AppRoutes.home :(context) => const Home(),
           AppRoutes.login :(context) => const LogIn(),
           AppRoutes.story :(context) => const Story(),
-          AppRoutes.contacts :(context) => const Contacts()
+          AppRoutes.contacts :(context) => const Contacts(),
+          AppRoutes.currentStory :(context) => CurrentStory(userStory: ModalRoute.of(context)!.settings.arguments as StoryModel)
         },
       ),
     );

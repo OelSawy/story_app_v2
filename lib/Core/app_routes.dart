@@ -6,4 +6,5 @@ class AppRoutes{
   static String story = "Story";
   static String init = "/";
   static String contacts = "Contacts";
+  static String currentStory = "current_story";
 }
