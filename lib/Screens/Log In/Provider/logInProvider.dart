@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:story_app_v2/Core/Enums.dart';
 import 'package:story_app_v2/Data/Services/Login%20Service/LoginService.dart';
 import 'package:story_app_v2/Screens/Log%20In/Provider/logInState.dart';
+import 'package:story_app_v2/Screens/Story/Provider/StoryProvider.dart';
 import '../../../Core/app_routes.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -16,12 +18,11 @@ class LogInProvider extends ChangeNotifier {
   void verify(BuildContext context) async {
     state.status = ScreenStatus.loading;
     notifyListeners();
-    await Future.delayed(const Duration(seconds: 5));
     state.loginModel = await LoginService().login(state.mail!, state.password!);
     if (state.loginModel != null) {
       state.status = ScreenStatus.done;
       notifyListeners();
-      Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.story, (route) => false);
     } else {
       state.status = ScreenStatus.error;
       notifyListeners();
